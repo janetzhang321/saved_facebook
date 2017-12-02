@@ -15,11 +15,11 @@ def set_timer(days): #diff options: tonight, tomorrow, in a week, don't remind m
 #evalfxns rtrn secs since epoch
 def eval_restOfDay():
     timeNow = int(time.time())
-    timeBuffer = 2*24*60*6
+    timeBuffer = 2*24*60*6 #add two hours
     bestTimeBeg = int(time.mktime(time.strptime(time.strftime('15:00:00 %x'), "%X %x")))
     bestTimeEnd = int(time.mktime(time.strptime(time.strftime('23:59:59 %x'), "%X %x")))
     if timeNow >= bestTimeBeg and timeNow <= bestTimeEnd - timeBuffer:
-        return timeNow + timeBuffer #add two hours
+        return timeNow + timeBuffer
     if timeNow < bestTimeBeg:
         return bestTimeBeg
     else:
@@ -36,7 +36,4 @@ def eval_week():
     return bestTimeBeg    
 
 def make_reminder(secs):
-    
-
-
-
+    pass
