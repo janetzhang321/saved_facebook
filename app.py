@@ -1,13 +1,9 @@
 from flask import Flask, render_template, request, session, redirect, url_for, send_from_directory, flash, jsonify
 import json, os, urllib, hashlib, pprint
-<<<<<<< HEAD
 from time import gmtime, strftime, localtime
 import utils.data, utils.timer
-=======
-from time import gmtime, strftime
-import utils.data
 import utils.keywords
->>>>>>> f30669ef50bcba36f4386f6131a21994c6647700
+
 
 app = Flask(__name__)
 
