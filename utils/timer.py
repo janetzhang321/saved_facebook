@@ -32,8 +32,10 @@ def eval_day():
     return bestTimeBeg
 
 def eval_week():
+
     bestTimeBeg = int(time.mktime(time.strptime(time.strftime('15:00:00 %x'),"%X %x"))) + 7*24*60*60  
     return bestTimeBeg    
+
 
 def make_reminder(secs):
     pass
