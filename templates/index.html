@@ -54,7 +54,9 @@
           <div class="row">
             <form method="POST">
               {% for i in info %}
-              <div class="col-lg-12 col-sm-12"><div class="well"><p>  {{i["message"]}}
+              <div class="col-lg-12 col-sm-12"><div class="well"><p>
+                <h2>{{i["name"]}} </h2>
+                 {{i["msg"]["message"]}}
                 <br>
                 <button name="save" type="submit" value="{{i["id"]}}">Save Post</button></p></div></div>
 

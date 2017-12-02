@@ -8,8 +8,8 @@ connection = MongoClient("127.0.0.1")
 db = connection['test_database']
 
 
-def save_article(link, msg):
-    post = {'link': link, 'msg': msg}
+def save_article(link,source, msg):
+    post = {'link': link, 'name': source, 'msg': msg}
     db.test_collection.insert(post)
 
 def fetch_articles():
