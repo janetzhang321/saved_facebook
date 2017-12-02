@@ -107,6 +107,7 @@ def main():
 def getArticle(article):
     saved = utils.data.fetch_articles(0)
     article = utils.data.fetch_article(article)
+    print article
     return render_template("article.html",article=article, saved=saved)
 
 
