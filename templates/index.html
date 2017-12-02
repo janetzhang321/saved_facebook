@@ -32,13 +32,16 @@
         <h3>Saved</h3>
         <ul class="nav nav-pills nav-stacked">
           {% for link in saved %}
-            <li><a href="#">
-              {{ link["msg"][:50] }}
+            <li><a href="/">
+              {{link["source"]}}:
+              {{ link["msg"][:35] }}
             </a></li>
+
           {% endfor %}
         </ul>
       </div>
   </div>
+
 
   <div id="main">
       <div class="col-md-12">
@@ -49,9 +52,26 @@
           <div class="row">
             <form method="POST">
               {% for i in info %}
-              <div class="col-lg-12 col-sm-12"><div class="well"><p>  {{i["message"]}}
+              <div class="col-lg-12 col-sm-12"><div class="well"><p>
+<h2>{{i["source"]}}</h2>
+                {{i["msg"]}}
                 <br>
-                <button name="save" type="submit" value="{{i["id"]}}">Save Post</button></p></div></div>
+                <button name="save" type="submit" value="{{i["id"]}}">Save Post</button></p>
+
+                <!-- Reminder PopUp -->
+                <div class="row">
+                  <div class="col-sm-8"></div>
+                  <div class="col-sm-4" style="background-color:lavender;">
+                    <div class="list-group" form action="/" method="get">
+                      Set a Reminder?
+                      <a href="#" class="list-group-item">Tonight</a>
+                      <a href="#" class="list-group-item">Tomorrow</a>
+                      <a href="#" class="list-group-item">Next Week</a>
+                      <a href="#" class="list-group-item">Don't remind me</a>
+                    </div>
+                  </div>
+                </div>
+              </div></div>
 
               <br><br><br>
               {% endfor %}
