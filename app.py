@@ -65,7 +65,8 @@ def main():
 
     if request.method == "GET":
         info = generatePages(data)
-        return render_template("index.html", info=info)
+        saved = utils.data.fetch_articles()
+        return render_template("index.html", info=info, saved=saved)
 
 
 
