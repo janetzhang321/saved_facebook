@@ -15,15 +15,9 @@ app.secret_key = 'idk'#os.urandom(32)
 secret=""
 
 # get Facebook access token from environment variable
-<<<<<<< HEAD
-ACCESS_TOKEN_ME = "EAACEdEose0cBABGAzZB4BfnFlu8HWJmZBUNwno9etBdcquVqoXZCRpZCPtl5yPvcHf2ZCLiPYOHUCuhHxOGFzU9Lm0vJX7DIdXO2LpqpXEizgKDRXLgITJATvqp4mAtaEjRwjBgpaPZBd5xXDG4Tk6Httgm4ZCGv1bbwZC7evycBjihviVbYPyZCzzicFq8shTsE3sM6tCoFHogZDZD"
-ACCESS_TOKEN_PAGE = "EAACEdEose0cBABGAzZB4BfnFlu8HWJmZBUNwno9etBdcquVqoXZCRpZCPtl5yPvcHf2ZCLiPYOHUCuhHxOGFzU9Lm0vJX7DIdXO2LpqpXEizgKDRXLgITJATvqp4mAtaEjRwjBgpaPZBd5xXDG4Tk6Httgm4ZCGv1bbwZC7evycBjihviVbYPyZCzzicFq8shTsE3sM6tCoFHogZDZD"
-=======
 
 ACCESS_TOKEN_ME = "EAACEdEose0cBANSj3ucWDnjY6xna0ZAt1aV3f5Pgr2XcLbWydKPLmwgJS4rx9nNEBNjUZB117XkMfRb4x9bjfLgWDJGFZAfmp531XJnA36wgdoZCmXNEq9agLXUJef2ReX7mUF8ZAGa9xJShjZBOZC8Tem0ITzYyasMj8d8qADi4PtAJteNuLFZBwbITw3965F4ZD"
-ACCESS_TOKEN_PAGE = ACCESS_TOKEN_ME 
 
->>>>>>> f30669ef50bcba36f4386f6131a21994c6647700
 
 # build the URL for the API endpoint to access pages the user likes
 def build():
@@ -73,13 +67,11 @@ def main():
         resp = urllib.urlopen(url_page).read()
 
         msg = json.loads(resp)["message"]
-<<<<<<< HEAD
-        utils.data.save_article(ID, msg) #save id and msg of post
-=======
+
+
         keywords = utils.keywords.retKeywords(msg)
 
         utils.data.save_article(ID, msg, keywords) #save id and msg of post
->>>>>>> f30669ef50bcba36f4386f6131a21994c6647700
 
         return redirect(url_for('main'))
 
