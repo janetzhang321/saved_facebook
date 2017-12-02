@@ -1,7 +1,7 @@
 from flask import Flask, render_template, request, session, redirect, url_for, send_from_directory, flash, jsonify
 import json, os, urllib, hashlib, pprint
-from time import gmtime, strftime
-import utils.data
+from time import gmtime, strftime, localtime
+import utils.data, utils.timer
 
 app = Flask(__name__)
 
@@ -9,8 +9,8 @@ app.secret_key = 'idk'#os.urandom(32)
 secret=""
 
 # get Facebook access token from environment variable
-ACCESS_TOKEN_ME = "EAACEdEose0cBAGX4oVoTCstDT81HJxFbwxZAR0UZCtP0ZAoMfXNMXqO4b1vm1YBEHwi0HtolujfyV1fHNBEF86rFeShtjzRgI8jBGSpJE1SsrK4jBkjVmdj1T4E919qhtyE3xZCwGEiZBdRaZCZAvs4IbBoBd908ipZBUrrn5A3tOies9mR8cDaDtIrexQPOxT4ZD"
-ACCESS_TOKEN_PAGE = "EAACEdEose0cBAGeVA2SMUvtiaZB4TbP9OjHd9OZB3so1EAVjLaZC2q7T88caqYt69raQIbinWgGkK1PjxHzEgHJI8ZClMN32fWakN0DGR4k472FllZBKaHn9UznTXI8txHGqSCA0r2Ps61BO2GEDdeztEwxLgVhattCM2suECPAseBZBCG3KVDYh8JBIwFya4ZD"
+ACCESS_TOKEN_ME = "EAACEdEose0cBABGAzZB4BfnFlu8HWJmZBUNwno9etBdcquVqoXZCRpZCPtl5yPvcHf2ZCLiPYOHUCuhHxOGFzU9Lm0vJX7DIdXO2LpqpXEizgKDRXLgITJATvqp4mAtaEjRwjBgpaPZBd5xXDG4Tk6Httgm4ZCGv1bbwZC7evycBjihviVbYPyZCzzicFq8shTsE3sM6tCoFHogZDZD"
+ACCESS_TOKEN_PAGE = "EAACEdEose0cBABGAzZB4BfnFlu8HWJmZBUNwno9etBdcquVqoXZCRpZCPtl5yPvcHf2ZCLiPYOHUCuhHxOGFzU9Lm0vJX7DIdXO2LpqpXEizgKDRXLgITJATvqp4mAtaEjRwjBgpaPZBd5xXDG4Tk6Httgm4ZCGv1bbwZC7evycBjihviVbYPyZCzzicFq8shTsE3sM6tCoFHogZDZD"
 
 # build the URL for the API endpoint to access pages the user likes
 def build():
@@ -29,9 +29,9 @@ def generatePages(pages):
     linkIDs = [x['link'] for x in saved_articles]
     for link in pages:
         ID = link["id"]
-        url_page = "https://graph.facebook.com/"+ ID + "/feed?access_token=" + ACCESS_TOKEN_PAGE
+        url_page = "https://graph.facebook.com/"+ ID + "?access_token=" + ACCESS_TOKEN_PAGE
         resp = urllib.urlopen(url_page).read()
-        #print resp
+        print resp
         page = json.loads(resp)["data"][:3] # gets 3 articles from each page
         for msg in page:
             if "message" in msg and msg["id"] not in linkIDs: #if article is saved don't display
@@ -61,12 +61,14 @@ def main():
 
         msg = json.loads(resp)["message"]
         utils.data.save_article(ID, msg) #save id and msg of post
+
         return redirect(url_for('main'))
 
     if request.method == "GET":
         info = generatePages(data)
         saved = utils.data.fetch_articles()
-        return render_template("index.html", info=info, saved=saved)
+        days = request.form['remind']
+        return render_template("index.html", info=info, saved=saved, reminder = utils.timer.set_timer(days))
 
 
 
