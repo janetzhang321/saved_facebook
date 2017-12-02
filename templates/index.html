@@ -2,17 +2,14 @@
 <html>
   <head>
     <meta charset="utf-8">
-    <title>Bootstrap Fixed and Fluid Layout</title>
+    <title>Facebook: Saved</title>
     <meta name="description" content="How to make a fixed sidebar and flexible content area layout with Bootstrap 3." />
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="/static/css/bootstrap.min.css" />
     <link rel="stylesheet" href="/static/css/styles.css" />
   </head>
-  <body >
 
-
-
-
+  <body>
     <div class="navbar navbar-inverse navbar-fixed-top">
     <div class="navbar-header">
       <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
@@ -39,8 +36,6 @@
               {{ link["msg"][:50] }}
             </a></li>
           {% endfor %}
-          <li class="active"><a href="#">Section</a></li>
-          <li><a href="#">Section</a></li>
         </ul>
       </div>
   </div>
@@ -50,7 +45,7 @@
       	  <p class="visible">
             <button type="button" class="btn btn-primary btn-xs" data-toggle="offcanvas">Saved</button>
           </p>
-          <h2>Fixed + Fluid Bootstrap Template with Off-canvas Sidebar</h2>
+          <h2>Feed</h2>
           <div class="row">
             <form method="POST">
               {% for i in info %}
