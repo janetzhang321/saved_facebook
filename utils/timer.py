@@ -32,10 +32,11 @@ def eval_day():
     return bestTimeBeg
 
 def eval_week():
-    if day < 3:
+    #if day < 3:
         
     bestTimeBeg = time.mktime(time.strptime(time.strftime('15:00:00 {} %b %Y'.format(day)), "%X %d %b %Y"))
     bestTimeEnd = time.mktime(time.strptime(time.strftime('23:59:59 {} %b %Y'.format(day)), "%X %d %b %Y"))
+    pass
 
 def make_reminder(date):
     pass
