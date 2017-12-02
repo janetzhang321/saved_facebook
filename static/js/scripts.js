@@ -5,7 +5,7 @@ $(document).ready(function() {
 });
 
 //timer code
-var date = ;//eval date
+var date = 0;//eval date
 var reminder = new Date();
 reminder.setFullYear(date);
 var today = new Date();
