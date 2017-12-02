@@ -1,6 +1,7 @@
 from flask import Flask, render_template, request, session, redirect, url_for, send_from_directory, flash, jsonify
 import json, os, urllib, hashlib, pprint
 from time import gmtime, strftime
+import utils.data
 
 app = Flask(__name__)
 
@@ -8,8 +9,8 @@ app.secret_key = 'idk'#os.urandom(32)
 secret=""
 
 # get Facebook access token from environment variable
-ACCESS_TOKEN_ME = "EAACEdEose0cBAFz4E1WYp8QF9G5diWc2gOMQyiKrTpYTvZCU6aD88mnBoNMqx0Vjdv0Nvuf4AXfrW5W98QrZBBgkm16KHZAug8mxgeUTS2155K7FSeWFNbNNJ9oPDepY5y5Eo7iSIYnUtaZC9eAOgX5XgMQImoB7xJqwcm8hLRZBjRk4fFZAdDikfZAgoMVv28ZD"
-ACCESS_TOKEN_PAGE = "EAACEdEose0cBAPAgTmjyD80uI358433dSorhPua0QdZBlX19PazcAoCX11lFzPkTgZBaFvzlExZBEBts7IZAxpk94TZB9nIZBHb7yTYfZALb8AFYGFUy9svZCktdKVHbylRuHX9SU5sN4oFZBtJD4wQbw5uRs4y3jbeJfG0GZAnIhoeBwSdr63MKEHJR8TEGtIbwcZD"
+ACCESS_TOKEN_ME = "EAACEdEose0cBAGX4oVoTCstDT81HJxFbwxZAR0UZCtP0ZAoMfXNMXqO4b1vm1YBEHwi0HtolujfyV1fHNBEF86rFeShtjzRgI8jBGSpJE1SsrK4jBkjVmdj1T4E919qhtyE3xZCwGEiZBdRaZCZAvs4IbBoBd908ipZBUrrn5A3tOies9mR8cDaDtIrexQPOxT4ZD"
+ACCESS_TOKEN_PAGE = "EAACEdEose0cBAGeVA2SMUvtiaZB4TbP9OjHd9OZB3so1EAVjLaZC2q7T88caqYt69raQIbinWgGkK1PjxHzEgHJI8ZClMN32fWakN0DGR4k472FllZBKaHn9UznTXI8txHGqSCA0r2Ps61BO2GEDdeztEwxLgVhattCM2suECPAseBZBCG3KVDYh8JBIwFya4ZD"
 
 # build the URL for the API endpoint
 
@@ -25,14 +26,16 @@ data = [{u'created_time': u'2017-11-26T19:26:20+0000', u'name': u'Postcrypt Coff
 
 def generatePages(pages):
     retL = []
+    saved_articles = utils.data.fetch_articles()
+    linkIDs = [x['link'] for x in saved_articles]
     for link in pages:
         ID = link["id"]
         url_page = "https://graph.facebook.com/"+ ID + "/feed?access_token=" + ACCESS_TOKEN_PAGE
         resp = urllib.urlopen(url_page).read()
-        print resp
+        #print resp
         page = json.loads(resp)["data"][:3]
         for msg in page:
-            if "message" in msg:
+            if "message" in msg and msg["id"] not in linkIDs:
                 retL.append(msg)
     return retL
 
@@ -50,9 +53,24 @@ def generatePages(pages):
 
 @app.route("/", methods=["GET","POST"])
 def main():
-    info = generatePages(data)
-    print info
-    return render_template("index.html", info=info)
+    print request.method
+    if request.method =="POST":
+        ID = request.form["save"]
+        #print ID
+
+        url_page = "https://graph.facebook.com/"+ ID + "?access_token=" + ACCESS_TOKEN_PAGE
+        resp = urllib.urlopen(url_page).read()
+        #print resp
+        msg = json.loads(resp)["message"]
+
+        utils.data.save_article(ID, msg)
+        return redirect(url_for('main'))
+
+    if request.method == "GET":
+        info = generatePages(data)
+        return render_template("index.html", info=info)
+
+
 
 
 

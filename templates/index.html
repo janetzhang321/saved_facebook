@@ -47,10 +47,15 @@
           </p>
           <h2>Fixed + Fluid Bootstrap Template with Off-canvas Sidebar</h2>
           <div class="row">
+            <form method="POST">
               {% for i in info %}
-              <div class="col-lg-12 col-sm-12"><div class="well"><p>  {{i["message"]}}</p></div></div>
+              <div class="col-lg-12 col-sm-12"><div class="well"><p>  {{i["message"]}}
+                <br>
+                <button name="save" type="submit" value="{{i["id"]}}">Save Post</button></p></div></div>
+
               <br><br><br>
               {% endfor %}
+            </form>
           </div>
 
       </div>

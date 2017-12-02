@@ -7,12 +7,15 @@ connection = MongoClient("127.0.0.1")
 
 db = connection['test_database']
 
-post = {}
 
-def save_article(link):
-    post['link'] = link
+def save_article(link, msg):
+    post = {'link': link, 'msg': msg}
+    db.test_collection.insert(post)
 
-save_article('facebook.com')
+def fetch_articles():
+    articles = list(db.test_collection.find())
+    return articles
+#save_article('facebook.com')
 
-db.test_collection.insert(post)
+#db.test_collection.insert(post)
 cursor = db.test_collection.find({})
