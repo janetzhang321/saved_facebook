@@ -12,7 +12,7 @@ secret=""
 
 # get Facebook access token from environment variable
 
-ACCESS_TOKEN_ME = "EAACEdEose0cBAJGUNHFFpwSQufsMnisa30LS58bIoP8wNoFdhcEuCEKDgDHnQLIDtitVhlgZAZAUx8JenGTNRuZBEPwZADnwfgWDmOP3s42fqFNRCp6upTECDQ6ZAal7Gi1pXw0F16ILoBLfKAD79NkG1ZCbMoZAu7b6wqZAZAGhYZCDN5Si9stKYDpLCyHWygxgQZD"
+ACCESS_TOKEN_ME = "EAACEdEose0cBAN70ZCbnDMaopShuuMwE92WY69J177ZCMEq1jsqsegDQQugLhhgqlSiV3MRcvW0QMSMZCxREpCgPGSmgjmZCQacthmWEpksFKpZAlRA9DT0Soingw68A8NyOnbZARyuDtYIDqaN7SVHZA58RHAUwboiWo9WeKMiCwFHtf7mtUwbFZB5ZCJZAoVMmYZD"
 
 
 # build the URL for the API endpoint to access pages the user likes
@@ -31,7 +31,7 @@ data = [{u'created_time': u'2017-11-26T19:26:20+0000', u'name': u'Postcrypt Coff
 # generate a JSON of the links of the posts from the feed of the pages the user likes
 def generatePages(pages):
     retL = []
-    saved_articles = utils.data.fetch_articles()
+    saved_articles = utils.data.fetch_articles(0)
     linkIDs = [x['link'] for x in saved_articles]
 
     #print "PAGES", pages
@@ -66,6 +66,14 @@ def getSource(ID):
     msg = json.loads(resp)["name"]
     return msg
 
+def getSource2(ID):
+    url_page = "https://graph.facebook.com/"+ ID + "?fields=from&access_token=" + ACCESS_TOKEN_ME
+    resp = urllib.urlopen(url_page).read()
+    print "RESP", resp
+
+    msg = json.loads(resp)["from"]["name"]
+    return msg
+
 
 @app.route("/", methods=["GET","POST"])
 def main():
@@ -75,10 +83,11 @@ def main():
         #print ID
         url_page = "https://graph.facebook.com/"+ ID + "?access_token=" + ACCESS_TOKEN_ME
         resp = urllib.urlopen(url_page).read()
-        msg = json.loads(resp)["message"]
-
+        stuff = json.loads(resp)
+        msg = stuff["message"]
+        #print json.loads(resp)
         keywords = utils.keywords.retKeywords(msg)
-        source=getSource(ID)
+        source=getSource2(stuff["id"])
         utils.data.save_article(ID, msg, keywords, source) #save id and msg of post
 
         return redirect(url_for('main'))
@@ -90,13 +99,13 @@ def main():
         info = generatePages(stuff)
         #print "INFO", info
         #return "HELLO"#print info
-        saved = utils.data.fetch_articles()
+        saved = utils.data.fetch_articles(0)
         #days = request.form['remind']
         return render_template("index.html", info=info, saved=saved)#, reminder = utils.timer.set_timer(days))
 
 @app.route("/<article>", methods=["GET","POST"])
 def getArticle(article):
-    saved = utils.data.fetch_articles()
+    saved = utils.data.fetch_articles(0)
     article = utils.data.fetch_article(article)
     return render_template("article.html",article=article, saved=saved)
 

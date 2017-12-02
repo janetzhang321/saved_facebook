@@ -32,12 +32,16 @@
         <h3>Saved</h3>
         <ul class="nav nav-pills nav-stacked">
           {% for link in saved %}
-            <li><a href="/">
-              {{link["source"]}}:
-              {{ link["msg"][:35] }}
-            </a></li>
+            <li>
+              <a href="/{{ link["link"][:35] }}">
+                {{link["source"]}}:
+                {{ link["msg"][:35] }}
+            </a>
+          </li>
 
           {% endfor %}
+          <li class="active"><a href="#">Section</a></li>
+          <li><a href="#">Section</a></li>
         </ul>
       </div>
   </div>
