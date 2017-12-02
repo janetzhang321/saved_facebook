@@ -14,32 +14,29 @@ def set_timer(days): #diff options: tonight, tomorrow, in a week, don't remind m
 
 #evalfxns rtrn secs since epoch
 def eval_restOfDay():
-    timeNow = time.mktime(time.get_timeNow())
-    restOfDay = time.mktime(time.strptime(time.strftime('23:59:59 %x'), "%X %x"))
-    bestTimeBeg = time.mktime(time.strptime(time.strftime('15:00:00 %x'), "%X %x"))
-    bestTimeEnd = time.mktime(time.strptime(time.strftime('23:59:59 %x'), "%X %x"))
-    if timeNow >= bestTimeBeg and timeNow <= bestTimeEnd:
-        return time.mktime(time.get_timeNow()) #add two hours
+    timeNow = int(time.time())
+    timeBuffer = 2*24*60*6
+    bestTimeBeg = int(time.mktime(time.strptime(time.strftime('15:00:00 %x'), "%X %x")))
+    bestTimeEnd = int(time.mktime(time.strptime(time.strftime('23:59:59 %x'), "%X %x")))
+    if timeNow >= bestTimeBeg and timeNow <= bestTimeEnd - timeBuffer:
+        return timeNow + timeBuffer #add two hours
     if timeNow < bestTimeBeg:
         return bestTimeBeg
     else:
         return eval_day()
 
 def eval_day():
-    day = int(time.strftime("%d", time.localtime())) + 1
-    bestTimeBeg = time.mktime(time.strptime(time.strftime('15:00:00 {} %b %Y'.format(day)), "%X %d %b %Y"))
-    bestTimeEnd = time.mktime(time.strptime(time.strftime('23:59:59 {} %b %Y'.format(day)), "%X %d %b %Y"))
+    #timeNow = int(time.time()) + 24*60*60
+    bestTimeBeg = int(time.mktime(time.strptime(time.strftime('15:00:00 %x'), "%X %x"))) + 24*60*60
+    #bestTimeEnd = time.mktime(time.strptime(time.strftime('23:59:59 %x'), "%X %x")) + 24*60*60
     return bestTimeBeg
 
 def eval_week():
-    if day < 3:
-        
-    bestTimeBeg = time.mktime(time.strptime(time.strftime('15:00:00 {} %b %Y'.format(day)), "%X %d %b %Y"))
-    bestTimeEnd = time.mktime(time.strptime(time.strftime('23:59:59 {} %b %Y'.format(day)), "%X %d %b %Y"))
+    bestTimeBeg = int(time.mktime(time.strptime(time.strftime('15:00:00 %x'),"%X %x"))) + 7*24*60*60  
+    return bestTimeBeg    
 
-def make_reminder(date):
-    pass
+def make_reminder(secs):
+    
 
-timeAdded = get_timeNow()
 
 
