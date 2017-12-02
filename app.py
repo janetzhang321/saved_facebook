@@ -2,6 +2,7 @@ from flask import Flask, render_template, request, session, redirect, url_for, s
 import json, os, urllib, hashlib, pprint
 from time import gmtime, strftime
 import utils.data
+import utils.keywords
 
 app = Flask(__name__)
 
@@ -10,8 +11,8 @@ secret=""
 
 # get Facebook access token from environment variable
 
-ACCESS_TOKEN_ME = "EAACEdEose0cBAIp6RooDkpUZAeMGHAis04rpH3L8xlZAZAbeHyPlYhP2o4OCr3En9DYNWfc0ZBxeUxFUvyFWmxOf96Pcd0NagNTfd7XEJGWAnZAoqwL58v4LNgDFCi0RHi9RbP7NLszqhpnjun02ZCfapKo4sZAAfdEUMfooiPG7sIfgDodd7I8tqFqtiFBqt8ZD"
-ACCESS_TOKEN_PAGE = "EAACEdEose0cBAIp6RooDkpUZAeMGHAis04rpH3L8xlZAZAbeHyPlYhP2o4OCr3En9DYNWfc0ZBxeUxFUvyFWmxOf96Pcd0NagNTfd7XEJGWAnZAoqwL58v4LNgDFCi0RHi9RbP7NLszqhpnjun02ZCfapKo4sZAAfdEUMfooiPG7sIfgDodd7I8tqFqtiFBqt8ZD"
+ACCESS_TOKEN_ME = "EAACEdEose0cBANSj3ucWDnjY6xna0ZAt1aV3f5Pgr2XcLbWydKPLmwgJS4rx9nNEBNjUZB117XkMfRb4x9bjfLgWDJGFZAfmp531XJnA36wgdoZCmXNEq9agLXUJef2ReX7mUF8ZAGa9xJShjZBOZC8Tem0ITzYyasMj8d8qADi4PtAJteNuLFZBwbITw3965F4ZD"
+ACCESS_TOKEN_PAGE = ACCESS_TOKEN_ME 
 
 
 # build the URL for the API endpoint to access pages the user likes
@@ -62,7 +63,10 @@ def main():
         resp = urllib.urlopen(url_page).read()
 
         msg = json.loads(resp)["message"]
-        utils.data.save_article(ID, msg) #save id and msg of post
+        keywords = utils.keywords.retKeywords(msg)
+
+        utils.data.save_article(ID, msg, keywords) #save id and msg of post
+
         return redirect(url_for('main'))
 
     if request.method == "GET":
