@@ -34,18 +34,19 @@ def generatePages(pages):
     saved_articles = utils.data.fetch_articles()
     linkIDs = [x['link'] for x in saved_articles]
 
-    print "PAGES", pages
+    #print "PAGES", pages
     for link in pages:
-        print "LINK", link['id']
+        #print "LINK", link['id']
         ID = link["id"]
         url_page = "https://graph.facebook.com/"+ ID + "?fields=feed&access_token=" + ACCESS_TOKEN_ME
         resp = urllib.urlopen(url_page).read()
-        page = json.loads(resp)["feed"]["data"][:1] # gets 3 articles from each page
+        #print "\n\n\RESP", resp
+        page = json.loads(resp)["feed"]["data"][:3] # gets 3 articles from each page
+        #print "PAGE", page
         for msg in page:
             if "message" in msg and msg["id"] not in linkIDs: #if article is saved don't display
-                retL.append(msg)
-                print msg
-        break
+                retL.append({'msg':msg['message'], 'id': msg['id'], 'source': getSource(ID) })
+                #print "MSG", msg
     return retL
 
 #generatePages(data)
@@ -58,6 +59,12 @@ def generatePages(pages):
 #pagesLiked = json.loads(resp)['data']
 #print pagesLiked
 # display the result
+def getSource(ID):
+    url_page = "https://graph.facebook.com/"+ ID + "?access_token=" + ACCESS_TOKEN_ME
+    resp = urllib.urlopen(url_page).read()
+    #print "RESP", resp
+    msg = json.loads(resp)["name"]
+    return msg
 
 
 @app.route("/", methods=["GET","POST"])
@@ -71,22 +78,27 @@ def main():
         msg = json.loads(resp)["message"]
 
         keywords = utils.keywords.retKeywords(msg)
-
-        utils.data.save_article(ID, msg, keywords) #save id and msg of post
+        source=getSource(ID)
+        utils.data.save_article(ID, msg, keywords, source) #save id and msg of post
 
         return redirect(url_for('main'))
 
     if request.method == "GET":
 
-        stuff = data[0:2]
+        stuff = data[0:5]
 
         info = generatePages(stuff)
+        #print "INFO", info
         #return "HELLO"#print info
         saved = utils.data.fetch_articles()
         #days = request.form['remind']
         return render_template("index.html", info=info, saved=saved)#, reminder = utils.timer.set_timer(days))
 
-
+@app.route("/<article>", methods=["GET","POST"])
+def getArticle(article):
+    saved = utils.data.fetch_articles()
+    article = utils.data.fetch_article(article)
+    return render_template("article.html",article=article, saved=saved)
 
 
 
