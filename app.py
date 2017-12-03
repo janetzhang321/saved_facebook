@@ -113,12 +113,7 @@ def main():
         #days = request.form['remind']
         #print info
         currentTime = int(time())
-<<<<<<< HEAD
-        return render_template("index3.html", info=info, saved=saved, alertTime = request["POST"], alert = utils.timer.make_reminder(currentTime))
-=======
-        print "IN MAIN GET FUNCTION"
         return render_template("index3.html", info=info, saved=saved, alert = utils.timer.make_reminder(currentTime))
->>>>>>> 10b44eb2e14f01983587eb2661eae14bb68013a9
 
 @app.route("/<article>", methods=["GET","POST"])
 def getArticle(article):

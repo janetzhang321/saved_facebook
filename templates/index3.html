@@ -47,13 +47,6 @@
                 </li>
                 {% for link in saved %}
                 <li>
-<<<<<<< HEAD
-                    <a href="http://facebook.com/{{ link[" link "]}}">
-                        {{link["source"]}}: {{ link["msg"][:35] }}
-                    </a>
-                </li>
-
-=======
 
 
 		      <a href="http://facebook.com/{{ link["link"]}}">
@@ -64,7 +57,6 @@
 {% for keyword in link["keywords"]%}
 {{keyword.lower()}},
 {% endfor %}
->>>>>>> 10b44eb2e14f01983587eb2661eae14bb68013a9
 
 		  </a></li>
 
@@ -121,18 +113,10 @@
                     <div class="card-footer text-muted">
                         {{i["source"]}}
                     </div>
-<<<<<<< HEAD
                 </div>
                 <div class="line"></div>
 
                 {% endfor %}
-=======
-</div>
-<div class="line"></div>
-
-
-              {% endfor %}
->>>>>>> 10b44eb2e14f01983587eb2661eae14bb68013a9
             </div>
         </div>
     </div>
