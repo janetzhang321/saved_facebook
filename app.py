@@ -108,7 +108,7 @@ def main():
         info = utils.data.filter(postData)
         saved = utils.data.fetch_articles(random.randint(0,3))
         currentTime = int(time())
-        return render_template("index3.html", info=info, saved=saved, alert = utils.timer.make_reminder(currentTime))
+        return render_template("index3.html", info=info, saved=saved, alert = utils.timer.make_reminder(currentTime), timeNow = currentTime)
 
 @app.route("/<article>", methods=["GET","POST"])
 def getArticle(article):
