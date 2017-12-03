@@ -1,30 +1,31 @@
 <!DOCTYPE html>
 <html>
 
-    <head>
-        <meta charset="utf-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
 
-        <title>Faceboot</title>
+    <title>Faceboot</title>
 
-         <!-- Bootstrap CSS CDN -->
-        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
-        <!-- Our Custom CSS -->
-        <link rel="stylesheet" href="static/css/style3.css?v=123456756432">
-	<link rel="shortcut icon" href="{{ url_for('static', filename='favicon.ico') }}">
+    <!-- Bootstrap CSS CDN -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    <!-- Our Custom CSS -->
+    <link rel="stylesheet" href="static/css/style3.css?v=123456756432">
+    <link rel="shortcut icon" href="{{ url_for('static', filename='favicon.ico') }}">
 
-    </head>
-    <body>
+</head>
+
+<body>
 
 
-      {% block content %}
-        <div class="wrapper">
-            <!-- Sidebar Holder -->
-            <nav id="sidebar">
-                <div class="sidebar-header">
-                    <h3>Saved Faceboot</h3>
-                </div>
+    {% block content %}
+    <div class="wrapper">
+        <!-- Sidebar Holder -->
+        <nav id="sidebar">
+            <div class="sidebar-header">
+                <h3>Saved Faceboot</h3>
+            </div>
 
             <ul class="list-unstyled components">
                 <li>
@@ -49,19 +50,15 @@
                 <li>
 
 
-		      <a href="http://facebook.com/{{ link["link"]}}">
-			{{link["source"]}}:
-			{{link["msg"][:35] }}
-<br>
-	Tags:
-{% for keyword in link["keywords"]%}
-{{keyword.lower()}},
-{% endfor %}
+                    <a href="http://facebook.com/{{ link[" link "]}}">
+                        {{link["source"]}}: {{link["msg"][:35] }}
+                        <br> Tags: {% for keyword in link["keywords"]%} {{keyword.lower()}}, {% endfor %}
 
-		  </a></li>
+                    </a>
+                </li>
 
             </ul>
-
+            {% endfor %}
 
             <ul class="list-unstyled CTAs">
 
@@ -130,14 +127,14 @@
                     <h4 class="modal-title">Set a Reminder?</h4>
                 </div>
                 <div class="modal-body">
-                        <form action="/" method="POST">
-                            <div class="list-group"> 
-                                <a value=0 class="list-group-item">Tonight</a>
-                                <a value=1 class="list-group-item">Tomorrow</a>
-                                <a value=7 class="list-group-item">Next Week</a>
-                                <a value=-1 class="list-group-item">Don't remind me</a>
-                            </div>
-                        </form>
+                    <form action="/" method="POST">
+                        <div class="list-group">
+                            <a value=0 class="list-group-item">Tonight</a>
+                            <a value=1 class="list-group-item">Tomorrow</a>
+                            <a value=7 class="list-group-item">Next Week</a>
+                            <a value=-1 class="list-group-item">Don't remind me</a>
+                        </div>
+                    </form>
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-default" data-dismiss="modal">OK</button>
