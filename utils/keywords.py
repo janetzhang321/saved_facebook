@@ -15,4 +15,4 @@ def retKeywords(text):
         tempDict[x['keyword']] = x['confidence_score']
     selectedWords = dict(sorted(tempDict.iteritems(), key=operator.itemgetter(1), reverse=True)[0:10])
     print "IN RET KEYWORDS"
-    return random.sample(selectedWords.keys(),5)
+    return random.sample(selectedWords.keys(),3)
