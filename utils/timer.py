@@ -38,6 +38,10 @@ def eval_week():
 
 
 def make_reminder(secs):
+<<<<<<< HEAD
     if get_timeNow() >= secs:
         return True
+=======
+    pass
+>>>>>>> b55919de218ddf300e5974d7d4ba3b72d4547b8e
 
