@@ -11,6 +11,7 @@
         <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
         <!-- Our Custom CSS -->
         <link rel="stylesheet" href="static/css/style3.css?v=123456756432">
+        <script src="https://code.jquery.com/jquery-1.10.2.js"></script>
     </head>
     <body>
 
@@ -25,18 +26,20 @@
 
                 <ul class="list-unstyled components">
     <li>
-<form>                                            
+<form>
     <input type="text" id="st-search-input" class="st-search-input search-field" />
     <button type="submit">Submit</button>
  </form>
 <br>
 <div class="dropdown"> Sort:
   <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-    A to Z
+  Date Created
   </button>
+
+  
   <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+    <a class="dropdown-item" href="#">A to Z</a>
     <a class="dropdown-item" href="#">Z to A</a>
-    <a class="dropdown-item" href="#">Date Created</a>
     <a class="dropdown-item" href="#">Reminder Time</a>
   </div>
 </div>
@@ -52,7 +55,7 @@
 
 
 
-		  {% endfor %} 
+		  {% endfor %}
 
                </ul>
 
@@ -65,7 +68,7 @@
             <div id="content">
 	      <nav class="navbar navbar-default">
                 <div class="container-fluid">
-		  
+
                   <div class="navbar-header">
                     <button type="button" id="sidebarCollapse" class="navbar-btn active">
                       <span></span>
@@ -85,11 +88,11 @@
 
               {% for i in info %}
 
-<div class="card text-center">  
+<div class="card text-center">
   <div class="card-block">
     <p class="card-text">{{i["msg"]}} </p>
  <form method="POST">
-    <button class="btn btn-primary" name="save" type="submit" value="{{i["id"]}}"> 
+    <button class="btn btn-primary" name="save" type="submit" value="{{i["id"]}}">
       Save for later!</button>
 </form>
   </div>
@@ -145,5 +148,19 @@
 	     });
 
          </script>
+
+
+          <script>
+$( "select" )
+  .change(function () {
+    var str = "";
+    $( "select option:selected" ).each(function() {
+      str += $( this ).text() + " ";
+    });
+    $( "div" ).text( str );
+  })
+  .change();
+</script>
+
     </body>
 </html>
