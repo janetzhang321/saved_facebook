@@ -1,5 +1,5 @@
 from flask import Flask, render_template, request, session, redirect, url_for, send_from_directory, flash, jsonify
-import json, os, urllib, hashlib, pprint, random
+import json, os, urllib, hashlib, pprint, random, requests
 from time import gmtime, strftime, localtime, time
 import utils.data, utils.timer, utils.keywords
 
@@ -106,7 +106,7 @@ def main():
         #days = request.form['remind']
         #print info
         currentTime = int(time())
-        return render_template("index3.html", info=info, saved=saved, alert = utils.timer.make_reminder(currentTime))
+        return render_template("index3.html", info=info, saved=saved, alertTime = request["POST"], alert = utils.timer.make_reminder(currentTime))
 
 @app.route("/<article>", methods=["GET","POST"])
 def getArticle(article):

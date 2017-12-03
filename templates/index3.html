@@ -45,8 +45,6 @@
                 </li>
                 {% for link in saved %}
                 <li>
-
-
                     <a href="http://facebook.com/{{ link[" link "]}}">
                         {{link["source"]}}: {{ link["msg"][:35] }}
                     </a>
@@ -66,10 +64,6 @@
 
         <!-- Reminder PopUp -->
         <div class="row">
-
-
-
-
 
             <nav class="navbar navbar-default">
                 <div class="container-fluid">
@@ -104,7 +98,8 @@
                         <p class="card-text">{{i["msg"]}} </p>
                         <form method="POST">
                             <button type="button" class="btn btn-info btn-lg" data-toggle="modal" data-target="#myModal" value="{{i[" id "]}}">
-                                Save for later!</button>
+                                Save for later!
+                            </button>
                         </form>
                     </div>
                     <div class="card-footer text-muted">
@@ -113,34 +108,31 @@
                 </div>
                 <div class="line"></div>
 
-
-
                 {% endfor %}
             </div>
-
-
         </div>
-
     </div>
-    
+
     <!-- Modal -->
     <div class="modal fade" id="myModal" role="dialog">
         <div class="modal-dialog modal-sm">
             <div class="modal-content">
                 <div class="modal-header">
-                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                    <!-- <button type="button" class="close" data-dismiss="modal">&times;</button> -->
                     <h4 class="modal-title">Set a Reminder?</h4>
                 </div>
                 <div class="modal-body">
-                    <div class="list-group" form action="/" method="get">
-                        <a href="#" class="list-group-item">Tonight</a>
-                        <a href="#" class="list-group-item">Tomorrow</a>
-                        <a href="#" class="list-group-item">Next Week</a>
-                        <a href="#" class="list-group-item">Don't remind me</a>
-                    </div>
+                        <form action="/" method="POST">
+                            <div class="list-group"> 
+                                <a value=0 class="list-group-item">Tonight</a>
+                                <a value=1 class="list-group-item">Tomorrow</a>
+                                <a value=7 class="list-group-item">Next Week</a>
+                                <a value=-1 class="list-group-item">Don't remind me</a>
+                            </div>
+                        </form>
                 </div>
                 <div class="modal-footer">
-                    <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                    <button type="button" class="btn btn-default" data-dismiss="modal">OK</button>
                 </div>
             </div>
         </div>
