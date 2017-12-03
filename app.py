@@ -1,8 +1,7 @@
 from flask import Flask, render_template, request, session, redirect, url_for, send_from_directory, flash, jsonify
 import json, os, urllib, hashlib, pprint, random, requests
-from time import gmtime, strftime, localtime, time
 import utils.data, utils.timer, utils.keywords
-
+from time import time 
 
 app = Flask(__name__)
 

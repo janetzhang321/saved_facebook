@@ -95,15 +95,11 @@
                 <div class="card-block">
                     <p class="card-text">{{i["msg"]}} </p>
                     <form method="POST">
-<<<<<<< HEAD
-                        <button type="button" class="btn btn-info btn-lg" data-toggle="modal" data-target="#myModal" name="save" type="submit" value="{{i["
-                            id "]}}">
-=======
                         <button class="btn btn-info btn-lg" 
 				data-toggle="modal" 
 				data-target="#myModal" name="save" type="button"
 				value="{{i["id"]}}">
->>>>>>> 54adad72f2822ef719e7e7c4bea587708ab9a461
+
                             Save for later!
                         </button>
                     </form>
@@ -140,11 +136,8 @@
                     </form>
                 </div>
                 <div class="modal-footer">
-<<<<<<< HEAD
-                    <button type="button" class="btn btn-default" data-dismiss="modal">OK</button>
-=======
                   <button type="submit" name="reminder"class="btn btn-default" data-dismiss="modal">OK</button>
->>>>>>> 54adad72f2822ef719e7e7c4bea587708ab9a461
+
                 </div>
 
             </div>
