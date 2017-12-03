@@ -11,7 +11,7 @@
     <!-- Bootstrap CSS CDN -->
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
     <!-- Our Custom CSS -->
-    <link rel="stylesheet" href="static/css/style3.css">
+    <link rel="stylesheet" href="static/css/style3.css?v=123456756432">
     <link rel="shortcut icon" href="{{ url_for('static', filename='favicon.ico') }}">
 
 </head>
@@ -27,51 +27,41 @@
                 <h3>Saved Faceboot</h3>
             </div>
 
-            <div class="container-fluid unstyled">
-                <ul class="list-group" style="list-style: none;">
-                    <li style="padding-left: 20px;">
-                        <form>
-                            <input type="text" id="st-search-input" class="st-search-input search-field" />
-                            <button type="button" class="btn btn-info btn-s">Submit</button>
-                        </form><br>
+            <ul class="list-unstyled components">
+                <li>
+                    <form>
+                        <input type="text" id="st-search-input" class="st-search-input search-field" />
+                        <button type="submit">Submit</button>
+                    </form>
+                    <br>
                     <div class="dropdown"> Sort:
-                        <button class="btn btn-success dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true"
+                            aria-expanded="false">
                             A to Z
                         </button>
                         <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                            <a class="dropdown-item btn-success" href="#">Z to A</a>
-                            <a class="dropdown-item btn-success" href="#">Date Created</a>
-                            <a class="dropdown-item btn-success" href="#">Reminder Time</a>
+                            <a class="dropdown-item" href="#">Z to A</a>
+                            <a class="dropdown-item" href="#">Date Created</a>
+                            <a class="dropdown-item" href="#">Reminder Time</a>
                         </div>
                     </div>
-                    </li>
-                    <li>
-                    {% for link in saved %}
-                    <div class="card bg-primary card-outline-secondary" style="margin-bottom: 20px;">
-                        <a href="http://facebook.com/{{link["link"]}}">
-                            <div class="card-header">{{link["source"]}}</div>
-                        </a>
-                        <div class="card-block">
-                            <p class="card-text">
-                                {{link["msg"][:35] }}<br> 
-                            </p>
-                            Tags: 
-                            {% for keyword in link["keywords"]%}
-                            <button type="button" class="btn btn-info btn-xs">{{keyword.lower()}}</button>
-                            {% endfor %}
-                        </div>
-                        <div class="card-footer text-muted">
-                            {{timeNow}}
-                        </div>
-                    </div>
-                    {% endfor %}
                 </li>
-                </div>
+                {% for link in saved %}
+                <li>
+                    <a href="http://facebook.com/{{link["link"]}}">
+                        {{link["source"]}}: {{link["msg"][:35] }}
+                        <br> Tags: {% for keyword in link["keywords"]%} {{keyword.lower()}}, {% endfor %}
+
+                    </a>
+                </li>
+                {% endfor %}
+            </ul>
+            <ul class="list-unstyled CTAs"></ul>
         </nav>
 
         <!-- Page Content Holder -->
-        <div id="content" style="padding: 0;">
-            <nav class="navbar navbar-default" style="margin-bottom: 0px;">
+        <div id="content">
+            <nav class="navbar navbar-default">
                 <div class="container-fluid">
                     <div class="navbar-header">
                         <button type="button" id="sidebarCollapse" class="navbar-btn active">
@@ -95,15 +85,7 @@
                 <div class="card-block">
                     <p class="card-text">{{i["msg"]}} </p>
                     <form method="POST">
-<<<<<<< HEAD
-                        <button type="button" class="btn btn-info btn-lg" data-toggle="modal" data-target="#myModal" name="save" type="submit" value="{{i["
-                            id "]}}">
-=======
-                        <button class="btn btn-info btn-lg" 
-				data-toggle="modal" 
-				data-target="#myModal" name="save" type="button"
-				value="{{i["id"]}}">
->>>>>>> 54adad72f2822ef719e7e7c4bea587708ab9a461
+                        <button type="button" class="btn btn-info btn-lg" data-toggle="modal" data-target="#myModal" name="save" type="submit" value="{{i[" id "]}}">
                             Save for later!
                         </button>
                     </form>
@@ -132,19 +114,15 @@
                 <div class="modal-body">
                     <form action="/" method="POST">
                         <div class="list-group">
-                            <input type="radio" name="reminder" value=0 class="list-group-item"/>Tonight
-                            <input type="radio" name="reminder" value=1 class="list-group-item"/>Tomorrow
-                            <input type="radio" name="reminder" value=7 class="list-group-item"/>Next Week
-                            <input type="radio" name="reminder" value=-1 class="list-group-item"/>Don't remind me
+                            <a value=0 class="list-group-item">Tonight</a>
+                            <a value=1 class="list-group-item">Tomorrow</a>
+                            <a value=7 class="list-group-item">Next Week</a>
+                            <a value=-1 class="list-group-item">Don't remind me</a>
                         </div>
                     </form>
                 </div>
                 <div class="modal-footer">
-<<<<<<< HEAD
-                    <button type="button" class="btn btn-default" data-dismiss="modal">OK</button>
-=======
-                  <button type="submit" name="reminder"class="btn btn-default" data-dismiss="modal">OK</button>
->>>>>>> 54adad72f2822ef719e7e7c4bea587708ab9a461
+                  <button type="button" class="btn btn-default" data-dismiss="modal">OK</button>
                 </div>
 
             </div>
