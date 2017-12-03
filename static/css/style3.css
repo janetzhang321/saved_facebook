@@ -497,3 +497,13 @@ a.article, a.article:hover {
 
 /* 
 
+.box{
+    display: none;
+    width: 100%;
+}
+
+a:hover + .box,.box:hover{
+    display: block;
+    position: relative;
+    z-index: 100;
+}

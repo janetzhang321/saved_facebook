@@ -43,10 +43,15 @@
 </li>
                   {% for link in saved %}
 		  <li>
+
+
 		      <a href="http://facebook.com/{{ link["link"]}}">
 			{{link["source"]}}:
 			{{ link["msg"][:35] }}
 		  </a></li>
+
+
+
 		  {% endfor %} 
 
                </ul>
@@ -58,16 +63,16 @@
 
             <!-- Page Content Holder -->
             <div id="content">
-<nav class="navbar navbar-default">
-                    <div class="container-fluid">
-
-                        <div class="navbar-header">
-                            <button type="button" id="sidebarCollapse" class="navbar-btn active">
-                                <span></span>
-                                <span></span>
-                                <span></span>
-                            </button>
-                        </div>
+	      <nav class="navbar navbar-default">
+                <div class="container-fluid">
+		  
+                  <div class="navbar-header">
+                    <button type="button" id="sidebarCollapse" class="navbar-btn active">
+                      <span></span>
+                      <span></span>
+                      <span></span>
+                    </button>
+                  </div>
 
                         <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
                             <ul class="nav navbar-nav navbar-right">
@@ -93,6 +98,8 @@
   </div>
 </div>
 <div class="line"></div>
+
+
 
               {% endfor %}
 </div>
@@ -130,6 +137,13 @@
                      $(this).toggleClass('active');
                  });
              });
+
+	     $(document).ready(function(){
+	         $("#myBtn").click(function(){
+                    $("#myModal").modal();
+	         });
+	     });
+
          </script>
     </body>
 </html>
