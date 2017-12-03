@@ -1,6 +1,6 @@
 from flask import Flask, render_template, request, session, redirect, url_for, send_from_directory, flash, jsonify
 import json, os, urllib, hashlib, pprint
-from time import gmtime, strftime, localtime
+from time import gmtime, strftime, localtime, time
 import utils.data, utils.timer, utils.keywords
 
 
@@ -105,7 +105,8 @@ def main():
         saved = utils.data.fetch_articles(0)
         #days = request.form['remind']
         print info
-        return render_template("index3.html", info=info, saved=saved)#, reminder = utils.timer.set_timer(days))
+        currentTime = time()
+        return render_template("index3.html", info=info, saved=saved, alert = utils.timer.make_reminder(currentTime))
 
 @app.route("/<article>", methods=["GET","POST"])
 def getArticle(article):

@@ -2,7 +2,7 @@ from time import gmtime, strftime, localtime
 
 
 def get_timeNow():
-    return localtime()
+    return int(time.time())
 
 def set_timer(days): #diff options: tonight, tomorrow, in a week, don't remind me
     if days == 0: #eval best time to view tonight
@@ -38,5 +38,7 @@ def eval_week():
 
 
 def make_reminder(secs):
+    if get_timeNow() >= secs:
+        return True
     pass
 
