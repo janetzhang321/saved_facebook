@@ -10,7 +10,7 @@ secret=""
 
 # get Facebook access token from environment variable
 
-ACCESS_TOKEN_ME = "EAACEdEose0cBAFAd40WuzEeAdQw6lU9ZBYewl7BzIvskc6BW0vhcNf82FgQjGaU7ukA6pvZCZBXAVi9M0ZBol0S7PuXS3VLgiC7qoybQ15UPjEfCi47yRyzLXKRtuNVYVvYbp6nOJbHRL5cBh0gkUIVDiizzbqrDlRF9qiyBgZCuJeRaoM1FJLdMhFwzMgh0ZC4u6e6BcJpAZDZD"
+ACCESS_TOKEN_ME = "EAACEdEose0cBAMxeCJNPipLa0pwAqqbUjSZAjSFzCqetSaU6qqQZCGZBiV1Ps8fBZBViR9L2KtFBa8G80Q78eQIzqzLAhXSC6dmHwrze1inpflvMSkMlZB0dDnB3uV3dYMiynTZCHDlNZBUZBZBOv9ZCDwNNTqJwZB9SVmiZC1qXtPIlKi6OcWVWmy0U0z4kKDvGEvwZD"
 
 # build the URL for the API endpoint to access pages the user likes
 def build():
@@ -30,7 +30,7 @@ data = [{u'created_time': u'2017-11-26T19:26:20+0000', u'name': u'Postcrypt Coff
 # generate a JSON of the links of the posts from the feed of the pages the user likes
 def generatePages(pages):
     retL = []
-    saved_articles = utils.data.fetch_articles(random.randint(0,3))
+    saved_articles = utils.data.fetch_articles()
     linkIDs = [x['link'] for x in saved_articles]
 
     #print "PAGES", pages
@@ -75,32 +75,36 @@ def getSource2(ID):
     return msg
 
 
+
 @app.route("/", methods=["GET","POST"])
 def main():
-    print request.method
+    #print request.method
     if request.method =="POST":
+
+        #reminderValue = request.form["reminder"]
+
         ID = request.form["save"]
-        reminderValue = request.form["reminder"]
-        print reminderValue
+        #print "GELLO",  ID
         session["id"] = ID
+
         #print ID
         url_page = "https://graph.facebook.com/"+ ID + "?access_token=" + ACCESS_TOKEN_ME
         resp = urllib.urlopen(url_page).read()
         stuff = json.loads(resp)
-        print stuff
+        print "STUFF", stuff
         msg = stuff["message"]
         #print json.loads(resp)
         keywords = utils.keywords.retKeywords(msg)
         source=getSource2(stuff["id"])
         utils.data.save_article(ID, msg, keywords, source) #save id and msg of post
-        
+
         return redirect(url_for('main'))
 
     if request.method == "GET":
 
-        stuff = data[0:5]
+        #stuff = data[0:5]
 
-        info = postData
+        info = utils.data.filter(postData)
         saved = utils.data.fetch_articles(random.randint(0,3))
         currentTime = int(time())
         return render_template("index3.html", info=info, saved=saved, alert = utils.timer.make_reminder(currentTime), timeNow = currentTime)

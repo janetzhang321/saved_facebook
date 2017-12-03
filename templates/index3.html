@@ -53,9 +53,9 @@
                         </a>
                         <div class="card-block">
                             <p class="card-text">
-                                {{link["msg"][:35] }}<br> 
+                                {{link["msg"][:35] }}<br>
                             </p>
-                            Tags: 
+                            Tags:
                             {% for keyword in link["keywords"]%}
                             <button type="button" class="btn btn-info btn-xs">{{keyword.lower()}}</button>
                             {% endfor %}
@@ -95,10 +95,10 @@
             <div class="card text-center">
                 <div class="card-block">
                     <p class="card-text">{{i["msg"]}} </p>
-                    <form method="POST">
-                        <button class="btn btn-info btn-lg" 
-				data-toggle="modal" 
-				data-target="#myModal" name="save" type="button"
+                    <form method="POST" id="init">
+                        <button class="btn btn-info btn-lg"
+				data-toggle="modal"
+				data-target="#myModal" name="save" type="submit"
 				value="{{i["id"]}}">
 
                             Save for later!
@@ -127,19 +127,35 @@
                     <h4 class="modal-title">Set a Reminder?</h4>
                 </div>
                 <div class="modal-body">
-                    <form action="/" method="POST">
-                        <div class="list-group">
-                            <input type="radio" name="reminder" value=0 class="list-group-item"/>Tonight
-                            <input type="radio" name="reminder" value=1 class="list-group-item"/>Tomorrow
-                            <input type="radio" name="reminder" value=7 class="list-group-item"/>Next Week
-                            <input type="radio" name="reminder" value=-1 class="list-group-item"/>Don't remind me
-                        </div>
-                    </form>
-                </div>
-                <div class="modal-footer">
-                  <button type="submit" name="reminder"class="btn btn-default" data-dismiss="modal">OK</button>
+
+
+                  <form name='searchdata' id="search_form" action="/" method="POST">
+                <div class="input-with-icon success-control">
+                  <input type="radio" name="reminder" value=0 class="list-group-item"/>Tonight
+                  <input type="radio" name="reminder" value=1 class="list-group-item"/>Tomorrow
+                  <input type="radio" name="reminder" value=7 class="list-group-item"/>Next Week
+                  <input type="radio" name="reminder" value=-1 class="list-group-item"/>Don't remind me
 
                 </div>
+                <button onclick="form_submit()" name='reminder' value='submit' class="btn btn-danger">Ok</button>
+
+
+        </form>
+</div>
+  <script type="text/javascript">
+  function form_submit() {
+    document.getElementById("search_form").submit();
+   }
+   function form_submit2(){
+     document.getElementById("init").submit();
+   }
+  </script>
+
+
+
+
+
+
 
             </div>
         </div>
