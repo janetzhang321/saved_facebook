@@ -11,7 +11,7 @@ secret=""
 
 # get Facebook access token from environment variable
 
-ACCESS_TOKEN_ME = "EAACEdEose0cBADeZCiQiPDaZAyRZCnNSfTVaziQcIuLcGgWCRooRCuCqKwJLq2KQpwoP82ZAjUuRAulsZA1yQN3Hr7PM41B9vOx0TDU0ZAtkv9bCKxKiYPMSQUF9aMXU7lk8xubTgUOhMvDZAYN0AD25V4j4PYTw1F1ur4NdvG4tCu3isQRz9uYNJXmaT6walHObHshL4Gh7gZDZD"
+ACCESS_TOKEN_ME = "EAACEdEose0cBAJX3HPIfm17yUW2fncZBpv3YHTLMfoDLv5M9a0Nlg2LXMnr0KPngPwgXIsIZCt8mtZBlbZBbXLxW79oJsEUYuppDXZBAWPnZCZCaxSVuu39ur4fLqsUQ0p7IV1Pig3ROZAw7RKZBSEMJ2qkhsjoZCcE0xpNXZAbPM6wfoUiYdlBNLOOwLSXc5kXvHZA1RMokUL6J7QZDZD"
 
 
 # build the URL for the API endpoint to access pages the user likes
@@ -105,7 +105,7 @@ def main():
         saved = utils.data.fetch_articles(0)
         #days = request.form['remind']
         print info
-        currentTime = time()
+        currentTime = int(time())
         return render_template("index3.html", info=info, saved=saved, alert = utils.timer.make_reminder(currentTime))
 
 @app.route("/<article>", methods=["GET","POST"])
