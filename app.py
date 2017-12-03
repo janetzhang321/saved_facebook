@@ -1,5 +1,5 @@
 from flask import Flask, render_template, request, session, redirect, url_for, send_from_directory, flash, jsonify
-import json, os, urllib, hashlib, pprint
+import json, os, urllib, hashlib, pprint, random
 from time import gmtime, strftime, localtime, time
 import utils.data, utils.timer, utils.keywords
 
@@ -34,7 +34,7 @@ data = [{u'created_time': u'2017-11-26T19:26:20+0000', u'name': u'Postcrypt Coff
 # generate a JSON of the links of the posts from the feed of the pages the user likes
 def generatePages(pages):
     retL = []
-    saved_articles = utils.data.fetch_articles(0)
+    saved_articles = utils.data.fetch_articles(random.randint(0,3))
     linkIDs = [x['link'] for x in saved_articles]
 
     #print "PAGES", pages
@@ -109,7 +109,7 @@ def main():
         info = postData
         #print "INFO", info
         #return "HELLO"#print info
-        saved = utils.data.fetch_articles(0)
+        saved = utils.data.fetch_articles(random.randint(0,3))
         #days = request.form['remind']
         #print info
         currentTime = int(time())
@@ -118,7 +118,7 @@ def main():
 
 @app.route("/<article>", methods=["GET","POST"])
 def getArticle(article):
-    saved = utils.data.fetch_articles(0)
+    saved = utils.data.fetch_articles(random.randint(0,3))
     article = utils.data.fetch_article(article)
     #print article
     print "IN MAIN ARTICLE FUNCTION"

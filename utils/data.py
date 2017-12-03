@@ -19,9 +19,9 @@ def fetch_articles(i):
     if i == 0:
         return articles
     elif i == 1:
-        sorted(articles, key=lambda k: k['source'])
+        return sorted(articles, key=lambda k: k['source'])
     else:
-        sorted(articles, key=lambda k: k['source'], reverse=True) 
+        return sorted(articles, key=lambda k: k['source'], reverse=True) 
 
 
 def fetch_article(ID):
