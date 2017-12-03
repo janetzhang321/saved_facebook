@@ -21,7 +21,17 @@ def fetch_articles(i):
     elif i == 1:
         return sorted(articles, key=lambda k: k['source'])
     else:
-        return sorted(articles, key=lambda k: k['source'], reverse=True) 
+        return sorted(articles, key=lambda k: k['source'], reverse=True)
+
+def filter(info):
+    retL = []
+    saved_articles = fetch_articles(0)
+    linkIDs = [x['link'] for x in saved_articles]
+    print linkIDs
+    for i in info:
+        if i['id'] not in linkIDs:
+            retL.append(i)
+    return retL
 
 
 def fetch_article(ID):
