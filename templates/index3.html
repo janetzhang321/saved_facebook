@@ -11,6 +11,8 @@
         <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
         <!-- Our Custom CSS -->
         <link rel="stylesheet" href="static/css/style3.css?v=123456756432">
+	<link rel="shortcut icon" href="{{ url_for('static', filename='favicon.ico') }}">
+
     </head>
     <body>
 
@@ -47,7 +49,13 @@
 
 		      <a href="http://facebook.com/{{ link["link"]}}">
 			{{link["source"]}}:
-			{{ link["msg"][:35] }}
+			{{link["msg"][:35] }}
+<br>
+	Tags:
+{% for keyword in link["keywords"]%}
+{{keyword.lower()}},
+{% endfor %}
+
 		  </a></li>
 
 
@@ -98,7 +106,6 @@
   </div>
 </div>
 <div class="line"></div>
-
 
 
               {% endfor %}
