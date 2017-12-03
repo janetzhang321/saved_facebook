@@ -48,7 +48,7 @@
                 </li>
                 {% for link in saved %}
                 <li>
-                    <a href="http://facebook.com/{{link[" link "]}}">
+                    <a href="http://facebook.com/{{link["link"]}}">
                         {{link["source"]}}: {{link["msg"][:35] }}
                         <br> Tags: {% for keyword in link["keywords"]%} {{keyword.lower()}}, {% endfor %}
 
