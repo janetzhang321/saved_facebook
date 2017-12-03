@@ -11,7 +11,7 @@ secret=""
 
 # get Facebook access token from environment variable
 
-ACCESS_TOKEN_ME = "EAACEdEose0cBAJX3HPIfm17yUW2fncZBpv3YHTLMfoDLv5M9a0Nlg2LXMnr0KPngPwgXIsIZCt8mtZBlbZBbXLxW79oJsEUYuppDXZBAWPnZCZCaxSVuu39ur4fLqsUQ0p7IV1Pig3ROZAw7RKZBSEMJ2qkhsjoZCcE0xpNXZAbPM6wfoUiYdlBNLOOwLSXc5kXvHZA1RMokUL6J7QZDZD"
+ACCESS_TOKEN_ME = "EAACEdEose0cBAKskHKI9QIZCnMXNuX5gfi84M06BHPmHm2YT5i2yD4DadI4RDYZAfeHeYJQk6swMHpkQqtGWp0pmyvvk1JvlmNlCRLEgezu9U4NM1gGgukOpcnUMjrdiqb7ireSNW2GqHzaqldfhlDLFiMMWGOgTrCxEpgkkyOh20DeSlXsfG4fNTNIpYrAyA9dI756QZDZD"
 
 
 # build the URL for the API endpoint to access pages the user likes
