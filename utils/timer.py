@@ -38,7 +38,7 @@ def eval_week():
 
 
 def make_reminder(secs):
-    
+    pass
 
 
 
