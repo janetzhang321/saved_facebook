@@ -1,28 +1,30 @@
 <!DOCTYPE html>
 <html>
 
-<head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
 
-    <title>Faceboot</title>
+        <title>Faceboot</title>
 
-    <!-- Bootstrap CSS CDN -->
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
-    <!-- Our Custom CSS -->
-    <link rel="stylesheet" href="static/css/style3.css?v=123456756432">
-</head>
+         <!-- Bootstrap CSS CDN -->
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+        <!-- Our Custom CSS -->
+        <link rel="stylesheet" href="static/css/style3.css?v=123456756432">
+	<link rel="shortcut icon" href="{{ url_for('static', filename='favicon.ico') }}">
 
-<body>
+    </head>
+    <body>
 
-    {% block content %}
-    <div class="wrapper">
-        <!-- Sidebar Holder -->
-        <nav id="sidebar">
-            <div class="sidebar-header">
-                <h3>Saved Faceboot</h3>
-            </div>
+
+      {% block content %}
+        <div class="wrapper">
+            <!-- Sidebar Holder -->
+            <nav id="sidebar">
+                <div class="sidebar-header">
+                    <h3>Saved Faceboot</h3>
+                </div>
 
             <ul class="list-unstyled components">
                 <li>
@@ -45,15 +47,29 @@
                 </li>
                 {% for link in saved %}
                 <li>
+<<<<<<< HEAD
                     <a href="http://facebook.com/{{ link[" link "]}}">
                         {{link["source"]}}: {{ link["msg"][:35] }}
                     </a>
                 </li>
 
+=======
 
-                {% endfor %}
+
+		      <a href="http://facebook.com/{{ link["link"]}}">
+			{{link["source"]}}:
+			{{link["msg"][:35] }}
+<br>
+	Tags:
+{% for keyword in link["keywords"]%}
+{{keyword.lower()}},
+{% endfor %}
+>>>>>>> 10b44eb2e14f01983587eb2661eae14bb68013a9
+
+		  </a></li>
 
             </ul>
+
 
             <ul class="list-unstyled CTAs">
 
@@ -105,10 +121,18 @@
                     <div class="card-footer text-muted">
                         {{i["source"]}}
                     </div>
+<<<<<<< HEAD
                 </div>
                 <div class="line"></div>
 
                 {% endfor %}
+=======
+</div>
+<div class="line"></div>
+
+
+              {% endfor %}
+>>>>>>> 10b44eb2e14f01983587eb2661eae14bb68013a9
             </div>
         </div>
     </div>
